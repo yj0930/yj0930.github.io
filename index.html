@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+  <table>
+    <tr>
+      <td>url</td>
+      <td>
+        <input type="text" id="url" value="http://localhost:1856"/>
+      </td>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>
+        <label>
+          <input type="radio" name="method" value="GET" checked="checked"/>
+          <span>GET</span>
+        </label>
+        <label>
+          <input type="radio" name="method" value="POST"/>
+          <span>POST</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>
+        <input type="text" id="name"/>
+      </td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>
+        <input type="text" id="result"/>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input type="button" value="send"/>
+      </td>
+    </tr>
+  </table>
+  <script type="text/javascript">
+    $(":button").click(function(){
+      $.support.cors = true;
+      $.ajax({
+        url: $("#url").val(),
+        type: $("input[name='method']:checked").val(),
+        data: { name: $("#name").val() },
+        success: function(result){
+          $("#result").val(result);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
